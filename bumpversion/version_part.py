@@ -124,7 +124,9 @@ class Version:
             if label == part_name:
                 new_values[label] = self._values[label].bump()
                 bumped = True
-            elif bumped and not self._values[label].is_independent():
+            elif self._values[label].is_independent():
+                new_values[label] = self._values[label].bump()
+            elif bumped:
                 new_values[label] = self._values[label].null()
             else:
                 new_values[label] = self._values[label].copy()
